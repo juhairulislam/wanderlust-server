@@ -30,6 +30,17 @@ async function run() {
     const destinationCollection  = db.collection("destination")
 
 
+    app.post('/destination' ,async (req, res) =>{
+
+        const destinationData=  req.body 
+
+       const result = await destinationCollection.insertOne(destinationData) 
+
+       res.json(result)
+
+    })
+
+
 
 
     await client.db("admin").command({ ping: 1 });
