@@ -1,7 +1,7 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const cors = require("cors")
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, deserialize } = require('mongodb');
 dotenv.config()
 
 const uri =process.env.MONGODB_URI ;
@@ -31,7 +31,14 @@ async function run() {
     const db = client.db("wanderlust") 
 
 
-    const destinationCollection  = db.collection("destination")
+    const destinationCollection  = db.collection("destination") ;
+
+    app.get('/destination' , async (req, res) =>{
+
+        const result =await destinationCollection.find().toArray() ;
+
+        res.json(result) ;
+    })
 
 
     app.post('/destination' ,async (req, res) =>{
