@@ -67,7 +67,7 @@ async function run() {
       const {id} = req.params 
       const updatedData = req.body 
 
-      const result = destinationCollection.updateOne(
+      const result =await destinationCollection.updateOne(
 
         {_id: new ObjectId(id)},
         {$set: updatedData}
